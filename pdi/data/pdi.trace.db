@@ -831,3 +831,6 @@ Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from funcionario \000d\000adelete [*]from funcionario where id > 2"; SQL statement:
 select * from funcionario 
 delete from funcionario where id > 2 [42000-214]
+2022-08-04 11:20:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "PDI CHARACTER VARYING(255)": "'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lore... (573)"; SQL statement:
+insert into funcionario (cargo, email, nome, pdi, id) values (?, ?, ?, ?, ?) [22001-214]

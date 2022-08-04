@@ -20,6 +20,16 @@ public class Funcionario {
 
 	private String email;
 
+	private String pdi;
+
+	public String getPdi() {
+		return pdi;
+	}
+
+	public void setPdi(String pdi) {
+		this.pdi = pdi;
+	}
+
 	@Deprecated
 	protected Funcionario() {
 
@@ -52,7 +62,6 @@ public class Funcionario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 
 	public String getCargo() {
 		return cargo;

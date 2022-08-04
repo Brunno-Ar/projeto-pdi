@@ -22,6 +22,7 @@
 		 	<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></span> 
 			<input type="text" th:field="*{nome}" placeholder="Nome" class="form-control mb-4 col-4">
 			<input type="email" th:field="*{email}" placeholder="email" class="form-control mb-4 col-4">
+			<textarea maxlength="250" th:field="*{pdi}" rows="3" placeholder="Plano de Desenvolvimanto" class="form-control mb-4 col-4"></textarea>
 			<input type="text" th:field="*{cargo}" placeholder="Cargo" class="form-control mb-4 col-4">
 
 			<button type="submit" class="btn btn-info col-2">Salvar</button>
