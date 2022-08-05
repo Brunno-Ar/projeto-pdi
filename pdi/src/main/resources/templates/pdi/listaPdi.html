@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8" />
-<title>Lista de Funcionarios</title>
+<title>Lista PDIs</title>
 
 <!-- CSS only -->
 <link
@@ -14,11 +14,10 @@
 
 </head>
 <body>
-
 	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark"
 		id="main-navbar" th:fragment="navbar">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Lista Funcionarios</a>
+			<a class="navbar-brand" href="#">Lista de PDIs</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 				aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -40,7 +39,7 @@
 				</div>
 			</div>
 			<div class="align-content-cn col-sm-7">
-				<h2>Lista de Funcionarios</h2>
+				<h2>Lista de PDIs</h2>
 			</div>
 		</div>
 	</nav>
@@ -51,22 +50,21 @@
 			class="table table-sm table table-bordered table-responsive-md">
 			<thead class="table-dark">
 				<tr>
-					<th>Nome</th>
-					<th>Email</th>
-					<th>Cargo</th>
-					<th>Ações</th>
+					<th>Funcionario</th>
+					<th>Avaliação</th>
+					<th>Data de Criação</th>
+					<th>Excluir</th>
+
 				</tr>
 			</thead>
+
 			<tbody>
-				<tr th:each="funcionario : ${listaFuncionarios}">
-					<td th:text="${funcionario.nome}"></td>
-					<td th:text="${funcionario.email}"></td>
-					<td th:text="${funcionario.cargo}"></td>
+				<tr th:each="pdi : ${listaPdis}">
+					<td th:text="${pdi.funcionario.nome}"></td>
+					<td th:text="${pdi.avaliacao}"></td>
+					<td th:text="${pdi.dataCriacao}"></td>
 					<td>
-						<a th:href="@{/funcionarios/{id}(id=${funcionario.id})}" class="btn btn-primary">Alterar</a> 
-						<a th:href="@{/funcionarios/excluir/{id}(id=${funcionario.id})}" class="btn btn-danger">Excluir</a> 
-						<a th:href="@{/pdis/novo}" class="btn btn-danger">Cadastrar pdi</a> 
-						<a th:href="@{/pdis/lista/{idFuncionario}(idFuncionario=${funcionario.id})}" class="btn btn-primary">Lista de PDIs</a>
+						<a th:href="@{/pdis/excluirPdi/{id}(id=${pdi.id})}" class="btn btn-danger">Excluir</a> 
 					</td>
 				</tr>
 			</tbody>

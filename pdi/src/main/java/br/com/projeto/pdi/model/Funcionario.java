@@ -1,13 +1,17 @@
 package br.com.projeto.pdi.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "funcionario")
 public class Funcionario {
 
 	@Id
@@ -20,24 +24,8 @@ public class Funcionario {
 
 	private String email;
 
-	private String pdi;
-
-	public String getPdi() {
-		return pdi;
-	}
-
-	public void setPdi(String pdi) {
-		this.pdi = pdi;
-	}
-
-	@Deprecated
-	protected Funcionario() {
-
-	}
-
-	public Funcionario(String nome) {
-		this.nome = nome;
-	}
+	@OneToMany
+	private List<Pdi> pdi;
 
 	public Long getId() {
 		return id;
@@ -69,6 +57,14 @@ public class Funcionario {
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
+	}
+
+	public List<Pdi> getPdi() {
+		return pdi;
+	}
+
+	public void setPdi(List<Pdi> pdi) {
+		this.pdi = pdi;
 	}
 
 	@Override

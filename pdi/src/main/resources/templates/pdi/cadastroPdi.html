@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
 <meta charset="UTF-8" />
-<title>Lista de Funcionarios</title>
+<title>Processo de Desenvolvimento Individual</title>
 
 <!-- CSS only -->
 <link
@@ -11,14 +12,14 @@
 	rel="stylesheet"
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
-
 </head>
+
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark"
 		id="main-navbar" th:fragment="navbar">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Lista Funcionarios</a>
+			<a class="navbar-brand" href="#">Novo PDI</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
 				aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -40,37 +41,31 @@
 				</div>
 			</div>
 			<div class="align-content-cn col-sm-7">
-				<h2>Lista de Funcionarios</h2>
+				<h2>Cadastro de PDI</h2>
 			</div>
 		</div>
 	</nav>
 
 	<div class="container my-2">
-		<br>
-		<table border="1"
-			class="table table-sm table table-bordered table-responsive-md">
-			<thead class="table-dark">
-				<tr>
-					<th>Nome</th>
-					<th>Email</th>
-					<th>Cargo</th>
-					<th>Ações</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="funcionario : ${listaFuncionarios}">
-					<td th:text="${funcionario.nome}"></td>
-					<td th:text="${funcionario.email}"></td>
-					<td th:text="${funcionario.cargo}"></td>
-					<td>
-						<a th:href="@{/funcionarios/{id}(id=${funcionario.id})}" class="btn btn-primary">Alterar</a> 
-						<a th:href="@{/funcionarios/excluir/{id}(id=${funcionario.id})}" class="btn btn-danger">Excluir</a> 
-						<a th:href="@{/pdis/novo}" class="btn btn-danger">Cadastrar pdi</a> 
-						<a th:href="@{/pdis/lista/{idFuncionario}(idFuncionario=${funcionario.id})}" class="btn btn-primary">Lista de PDIs</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+
+		<form action="#" th:action="@{/pdis/salvar}" th:object="${pdi}"
+			method="POST">
+			<div>
+				<select id="funcionario" th:field="*{funcionario} "
+					class="form-control mb-4 col-4">
+					<option value="">Selecione o funcionario</option>
+					<option th:each="funcionario : ${funcionarios}"
+						th:value="${funcionario.id}" th:text="${funcionario.nome}"></option>
+				</select>
+
+				<textarea th:object="${pdi}" th:field="*{avaliacao}" rows="3"
+					placeholder="Avaliação"
+					class="form-control mb-4 col-4"></textarea>
+
+			</div>
+			<button type="submit" class="btn btn-info col-2">Salvar</button>
+		</form>
+
 	</div>
 </body>
 </html>
