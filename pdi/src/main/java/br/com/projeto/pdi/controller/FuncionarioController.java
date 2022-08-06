@@ -1,5 +1,6 @@
 package br.com.projeto.pdi.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.projeto.pdi.model.Funcionario;
+import br.com.projeto.pdi.model.Pdi;
 import br.com.projeto.pdi.repository.FuncionarioRepository;
+import br.com.projeto.pdi.repository.PdiRepository;
 
 @Controller
 @RequestMapping("/funcionarios")
@@ -20,6 +23,9 @@ public class FuncionarioController {
 
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
+
+	@Autowired
+	private PdiRepository pdiRepository;
 
 	@GetMapping("/lista")
 	public String listarFuncionarios(Model model) {
@@ -57,7 +63,14 @@ public class FuncionarioController {
 			throw new IllegalArgumentException("Funcionario invalido");
 		}
 
+		List<Pdi> pdis = funcionarioOptional.get().getPdis();
+		
+		if(!pdis.isEmpty()) {
+			pdiRepository.deleteAll(pdis);
+		}
+		funcionarioOptional = funcionarioRepository.findById(id);
 		funcionarioRepository.delete(funcionarioOptional.get());
+		
 		return "redirect:/funcionarios/lista";
 	}
 

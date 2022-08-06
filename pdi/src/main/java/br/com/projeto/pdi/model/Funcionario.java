@@ -1,9 +1,10 @@
 package br.com.projeto.pdi.model;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,10 +13,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "funcionario")
-public class Funcionario {
+public class Funcionario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String nome;
@@ -24,8 +27,16 @@ public class Funcionario {
 
 	private String email;
 
-	@OneToMany
-	private List<Pdi> pdi;
+	@OneToMany(mappedBy = "funcionario", fetch = FetchType.EAGER)
+	private List<Pdi> pdis;
+
+	public List<Pdi> getPdis() {
+		return pdis;
+	}
+
+	public void setPdis(List<Pdi> pdis) {
+		this.pdis = pdis;
+	}
 
 	public Long getId() {
 		return id;
@@ -59,33 +70,4 @@ public class Funcionario {
 		this.cargo = cargo;
 	}
 
-	public List<Pdi> getPdi() {
-		return pdi;
-	}
-
-	public void setPdi(List<Pdi> pdi) {
-		this.pdi = pdi;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Funcionario other = (Funcionario) obj;
-		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "Funcionario [nome=" + nome + "]";
-	}
 }

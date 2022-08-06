@@ -1,7 +1,7 @@
 package br.com.projeto.pdi.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,14 +15,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "pdi")
-public class Pdi {
+public class Pdi implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "fk_funcionario")
 	private Funcionario funcionario;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -60,23 +62,6 @@ public class Pdi {
 
 	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pdi other = (Pdi) obj;
-		return Objects.equals(id, other.id);
 	}
 
 }
