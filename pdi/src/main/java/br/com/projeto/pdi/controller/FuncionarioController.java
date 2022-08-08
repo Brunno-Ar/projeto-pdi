@@ -68,6 +68,7 @@ public class FuncionarioController {
 		if(!pdis.isEmpty()) {
 			pdiRepository.deleteAll(pdis);
 		}
+		
 		funcionarioOptional = funcionarioRepository.findById(id);
 		funcionarioRepository.delete(funcionarioOptional.get());
 		

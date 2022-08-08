@@ -66,8 +66,7 @@
 					<td>
 						<a th:href="@{/funcionarios/{id}(id=${funcionario.id})}" class="btn btn-primary">Alterar</a> 
 						<a th:href="@{/funcionarios/excluir/{id}(id=${funcionario.id})}" class="btn btn-danger">Excluir</a> 
-						<a th:href="@{/pdis/novo}" class="btn btn-danger">Cadastrar pdi</a> 
-						<a th:href="@{/pdis/lista/{idFuncionario}(idFuncionario=${funcionario.id})}" class="btn btn-primary">Lista de PDIs</a>
+						<a th:href="@{/pdis/lista/{idFuncionario}(idFuncionario=${funcionario.id})}" class="btn btn-info">Lista de PDIs</a>
 					</td>
 				</tr>
 			</tbody>
